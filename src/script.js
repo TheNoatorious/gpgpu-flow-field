@@ -2,6 +2,7 @@ import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { DRACOLoader } from "three/addons/loaders/DRACOLoader.js";
+import { GPUComputationRenderer } from "three/addons/misc/GPUComputationRenderer.js";
 import GUI from "lil-gui";
 import particlesVertexShader from "./shaders/particles/vertex.glsl";
 import particlesFragmentShader from "./shaders/particles/fragment.glsl";
@@ -92,6 +93,28 @@ renderer.setClearColor(debugObject.clearColor);
 const baseGeometry = {};
 baseGeometry.instance = new THREE.SphereGeometry(3);
 baseGeometry.count = baseGeometry.instance.attributes.position.count;
+
+/**
+ * GPU Computer
+ */
+
+// Setup
+const gpgpu = {};
+const squaredFBO = Math.sqrt(baseGeometry.count); // FBO textures in square sizes
+gpgpu.size = Math.ceil(squaredFBO); // Round up so each particle fits
+
+console.log(gpgpu.size); // Particles texture size check
+
+gpgpu.computation = new GPUComputationRenderer(
+    gpgpu.size,
+    gpgpu.size,
+    renderer
+);
+
+// Base particles
+const baseParticlesTexture = gpgpu.computation.createTexture();
+
+console.log(baseParticlesTexture); // Returns a data texture
 
 /**
  * Particles
