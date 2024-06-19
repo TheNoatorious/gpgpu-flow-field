@@ -6,6 +6,7 @@ import { GPUComputationRenderer } from "three/addons/misc/GPUComputationRenderer
 import GUI from "lil-gui";
 import particlesVertexShader from "./shaders/particles/vertex.glsl";
 import particlesFragmentShader from "./shaders/particles/fragment.glsl";
+import gpgpuParticlesShader from "./shaders/gpgpu/particles.glsl";
 
 /**
  * Base
@@ -114,7 +115,22 @@ gpgpu.computation = new GPUComputationRenderer(
 // Base particles
 const baseParticlesTexture = gpgpu.computation.createTexture();
 
+// Particles Variable
+gpgpu.particlesVariable = gpgpu.computation.addVariable(
+    "uParticles",
+    gpgpuParticlesShader,
+    baseParticlesTexture
+);
+
+gpgpu.computation.setVariableDependencies(gpgpu.particlesVariable, [
+    gpgpu.particlesVariable,
+]); // Loop variable computation
+
+// Init
+gpgpu.computation.init();
+
 console.log(baseParticlesTexture); // Returns a data texture
+console.log(baseParticlesTexture.image.data); // Contains a float32Array with the pixels
 
 /**
  * Particles
@@ -168,6 +184,8 @@ const tick = () => {
 
     // Render normal scene
     renderer.render(scene, camera);
+
+    gpgpu.computation.compute(); // Update particles variable on each frame
 
     // Call tick again on the next frame
     window.requestAnimationFrame(tick);
