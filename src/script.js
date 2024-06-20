@@ -132,6 +132,22 @@ gpgpu.computation.init();
 console.log(baseParticlesTexture); // Returns a data texture
 console.log(baseParticlesTexture.image.data); // Contains a float32Array with the pixels
 
+const fboTexture = gpgpu.computation.getCurrentRenderTarget(
+    gpgpu.particlesVariable
+).texture;
+
+// Debug plane
+// Visualise the FBO texture
+gpgpu.debug = new THREE.Mesh(
+    new THREE.PlaneGeometry(3, 3),
+    new THREE.MeshBasicMaterial({
+        map: fboTexture,
+    })
+);
+
+gpgpu.debug.position.x = 3;
+scene.add(gpgpu.debug);
+
 /**
  * Particles
  */
