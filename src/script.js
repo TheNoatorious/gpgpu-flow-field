@@ -115,6 +115,20 @@ gpgpu.computation = new GPUComputationRenderer(
 // Base particles
 const baseParticlesTexture = gpgpu.computation.createTexture();
 
+for (let i = 0; i < baseGeometry.count; i++) {
+    const i3 = i * 3;
+    const i4 = i * 4;
+
+    const particlesPosition = baseGeometry.instance.attributes.position.array;
+    const particlesChannel = baseParticlesTexture.image.data;
+
+    // Positions based on geometry
+    particlesChannel[i4 + 0] = particlesPosition[i3 + 0]; // r -> x
+    particlesChannel[i4 + 1] = particlesPosition[i3 + 1]; // g -> y
+    particlesChannel[i4 + 2] = particlesPosition[i3 + 2]; // b -> z
+    particlesChannel[i4 + 3] = 0; // a -> 0
+}
+
 // Particles Variable
 gpgpu.particlesVariable = gpgpu.computation.addVariable(
     "uParticles",
