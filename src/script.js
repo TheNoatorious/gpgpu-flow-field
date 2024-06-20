@@ -131,9 +131,9 @@ for (let i = 0; i < baseGeometry.count; i++) {
 
 // Particles Variable
 gpgpu.particlesVariable = gpgpu.computation.addVariable(
-    "uParticles",
-    gpgpuParticlesShader,
-    baseParticlesTexture
+    "uParticles", // FBO texture
+    gpgpuParticlesShader, // Saving logic
+    baseParticlesTexture // The base texture
 );
 
 gpgpu.computation.setVariableDependencies(gpgpu.particlesVariable, [
