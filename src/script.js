@@ -186,6 +186,8 @@ particles.material = new THREE.ShaderMaterial({
 particles.points = new THREE.Points(baseGeometry.instance, particles.material);
 scene.add(particles.points);
 
+particles.geometry = new THREE.BufferGeometry();
+
 /**
  * Tweaks
  */
