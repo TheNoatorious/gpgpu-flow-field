@@ -148,7 +148,7 @@ console.log(baseParticlesTexture.image.data); // Contains a float32Array with th
 
 const fboTexture = gpgpu.computation.getCurrentRenderTarget(
     gpgpu.particlesVariable
-).texture;
+).texture; // Provide the last saved FBO texture
 
 // Debug plane
 // Visualise the FBO texture
@@ -179,14 +179,13 @@ particles.material = new THREE.ShaderMaterial({
                 sizes.height * sizes.pixelRatio
             )
         ),
+        uParticlesTexture: new THREE.Uniform(),
     },
 });
 
 // Points
-particles.points = new THREE.Points(baseGeometry.instance, particles.material);
+particles.points = new THREE.Points(particles.geometry, particles.material);
 scene.add(particles.points);
-
-particles.geometry = new THREE.BufferGeometry();
 
 /**
  * Tweaks
@@ -213,6 +212,10 @@ const tick = () => {
 
     // Update controls
     controls.update();
+
+    // GPGPU Update
+    gpgpu.computation.compute();
+    particles.material.uniforms.uParticlesTexture.value = fboTexture;
 
     // Render normal scene
     renderer.render(scene, camera);
