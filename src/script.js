@@ -146,6 +146,9 @@ gpgpu.computation.setVariableDependencies(gpgpu.particlesVariable, [
     gpgpu.particlesVariable,
 ]); // Loop variable computation
 
+// Uniforms
+gpgpu.particlesVariable.material.uniforms.uTime = new THREE.Uniform(0);
+
 // Init
 gpgpu.computation.init();
 
@@ -267,6 +270,7 @@ const tick = () => {
     // Render normal scene
     renderer.render(scene, camera);
 
+    gpgpu.particlesVariable.material.uniforms.uTime.value = elapsedTime;
     gpgpu.computation.compute(); // Update particles variable on each frame
 
     // Call tick again on the next frame
