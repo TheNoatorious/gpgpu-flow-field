@@ -175,6 +175,7 @@ const particles = {};
 
 // Geometry
 const particlesUvArray = new Float32Array(baseGeometry.count * 2);
+const sizesArray = new Float32Array(baseGeometry.count); // 1 variable needed per vertex
 
 // Create random UV coordinates to pick pixels from the FBO texture
 // Loop rows: Y-coordinate
@@ -192,6 +193,8 @@ for (let y = 0; y < gpgpu.size; y++) {
         // Fill the particlesUvArray with UV coordinates
         particlesUvArray[i2 + 0] = uvX;
         particlesUvArray[i2 + 1] = uvY;
+
+        sizesArray[i] = Math.random(); // Randomise particle sizes
     }
 }
 
@@ -205,6 +208,10 @@ particles.geometry.setAttribute(
 particles.geometry.setAttribute(
     "aColor",
     baseGeometry.instance.attributes.color
+);
+particles.geometry.setAttribute(
+    "aSize",
+    new THREE.BufferAttribute(sizesArray, 1)
 );
 
 // Material
