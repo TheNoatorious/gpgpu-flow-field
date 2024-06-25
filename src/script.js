@@ -89,6 +89,12 @@ debugObject.clearColor = "#29191f";
 renderer.setClearColor(debugObject.clearColor);
 
 /**
+ * Load model
+ */
+
+const gltf = await gltfLoader.loadAsync("./model.glb");
+
+/**
  * Base geometry
  */
 const baseGeometry = {};
