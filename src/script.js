@@ -193,7 +193,7 @@ particles.geometry = new THREE.BufferGeometry();
 particles.geometry.setDrawRange(0, baseGeometry.count); // Draw this amount of vertices
 particles.geometry.setAttribute(
     "aParticlesUv",
-    new THREE.BufferAttribute(particlesUvArray)
+    new THREE.BufferAttribute(particlesUvArray, 2)
 );
 
 // Material
