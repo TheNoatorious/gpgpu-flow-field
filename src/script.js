@@ -167,6 +167,35 @@ scene.add(gpgpu.debug);
  */
 const particles = {};
 
+// Geometry
+const particlesUvArray = new Float32Array(baseGeometry.count * 2);
+
+// Create random UV coordinates to pick pixels from the FBO texture
+// Loop rows: Y-coordinate
+for (let y = 0; y < gpgpu.size; y++) {
+    // Loop columns: X-coordinate
+    for (let x = 0; x < gpgpu.size; x++) {
+        // Output of two values: X and Y
+        const i = y * gpgpu.size + x; // Fill the array
+        const i2 = i * 2; // y-coordinate
+
+        // Normalized texture coordinates (0 to 1)
+        const uvX = (x + 0.5) / gpgpu.size;
+        const uvY = (y + 0.5) / gpgpu.size;
+
+        // Fill the particlesUvArray with UV coordinates
+        particlesUvArray[i2 + 0] = uvX;
+        particlesUvArray[i2 + 1] = uvY;
+    }
+}
+
+particles.geometry = new THREE.BufferGeometry();
+particles.geometry.setDrawRange(0, baseGeometry.count); // Draw this amount of vertices
+particles.geometry.setAttribute(
+    "aParticlesUv",
+    new THREE.BufferAttribute(particlesUvArray)
+);
+
 // Material
 particles.material = new THREE.ShaderMaterial({
     vertexShader: particlesVertexShader,
