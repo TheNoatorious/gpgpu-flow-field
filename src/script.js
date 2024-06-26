@@ -240,14 +240,16 @@ scene.add(particles.points);
 /**
  * Tweaks
  */
-gui.addColor(debugObject, "clearColor").onChange(() => {
+gui.addColor(debugObject, "clearColor")
+    .onChange(() => {
     renderer.setClearColor(debugObject.clearColor);
-});
+    })
+    .name("Background colour");
 gui.add(particles.material.uniforms.uSize, "value")
     .min(0)
     .max(1)
     .step(0.001)
-    .name("uSize");
+    .name("Particles size");
 
 /**
  * Animate
