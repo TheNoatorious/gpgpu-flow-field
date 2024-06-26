@@ -118,7 +118,7 @@ gpgpu.computation = new GPUComputationRenderer(
     renderer
 );
 
-// Base particles
+// Base particles for the GPU-CR
 const baseParticlesTexture = gpgpu.computation.createTexture();
 
 for (let i = 0; i < baseGeometry.count; i++) {
@@ -132,7 +132,7 @@ for (let i = 0; i < baseGeometry.count; i++) {
     particlesChannel[i4 + 0] = particlesPosition[i3 + 0]; // r -> x
     particlesChannel[i4 + 1] = particlesPosition[i3 + 1]; // g -> y
     particlesChannel[i4 + 2] = particlesPosition[i3 + 2]; // b -> z
-    particlesChannel[i4 + 3] = 0; // a -> 0
+    particlesChannel[i4 + 3] = Math.random(); // Randomised value for the particle life cycle
 }
 
 // Particles Variable
@@ -148,6 +148,12 @@ gpgpu.computation.setVariableDependencies(gpgpu.particlesVariable, [
 
 // Uniforms
 gpgpu.particlesVariable.material.uniforms.uTime = new THREE.Uniform(0);
+gpgpu.particlesVariable.material.uniforms.uDeltaTime = new THREE.Uniform(0);
+gpgpu.particlesVariable.material.uniforms.uBase = new THREE.Uniform(
+    baseParticlesTexture
+);
+gpgpu.particlesVariable.material.uniforms.uFlowFieldInfluence =
+    new THREE.Uniform(0.5);
 
 // Init
 gpgpu.computation.init();
