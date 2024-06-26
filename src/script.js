@@ -248,7 +248,7 @@ scene.add(particles.points);
  */
 gui.addColor(debugObject, "clearColor")
     .onChange(() => {
-    renderer.setClearColor(debugObject.clearColor);
+        renderer.setClearColor(debugObject.clearColor);
     })
     .name("Background colour");
 gui.add(particles.material.uniforms.uSize, "value")
@@ -256,6 +256,12 @@ gui.add(particles.material.uniforms.uSize, "value")
     .max(1)
     .step(0.001)
     .name("Particles size");
+
+gui.add(gpgpu.particlesVariable.material.uniforms.uFlowFieldInfluence, "value")
+    .min(0)
+    .max(1)
+    .step(0.001)
+    .name("FlowField Influence");
 
 /**
  * Animate
@@ -279,6 +285,7 @@ const tick = () => {
     renderer.render(scene, camera);
 
     gpgpu.particlesVariable.material.uniforms.uTime.value = elapsedTime;
+    gpgpu.particlesVariable.material.uniforms.uDeltaTime.value = deltaTime;
     gpgpu.computation.compute(); // Update particles variable on each frame
 
     // Call tick again on the next frame
