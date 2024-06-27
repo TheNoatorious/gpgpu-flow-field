@@ -14,6 +14,8 @@ The GPGPU (General-Purpose computing on Graphics Processing Units) is a way of u
 1. gpgpu/particles; handles the position and flow field of each of the particles
 2. particles/fragment, vertex; styling for each particles
 
+The colour of the model is being handled as the vertices.
+
 ## Setup
 
 Download [Node.js](https://nodejs.org/en/download/).
