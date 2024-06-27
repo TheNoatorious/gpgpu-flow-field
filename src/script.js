@@ -175,6 +175,7 @@ gpgpu.debug = new THREE.Mesh(
 );
 
 gpgpu.debug.position.x = 3;
+gpgpu.debug.visible = false;
 scene.add(gpgpu.debug);
 
 /**
