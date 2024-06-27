@@ -1,6 +1,5 @@
 /**/node_modules
 /**/bundler
-/**/dist
 .DS_Store
 *.log
 .idea
