@@ -36,7 +36,7 @@ void main() {
         particle.xyz += flowField * uDeltaTime * strength * uFlowFieldStrength; // Add the direction to the particles
 
         // Life cycle: Decay
-        particle.a += uDeltaTime * 0.03; // Set life cycle in the alpha channel
+        particle.a += uDeltaTime * 0.3; // Set life cycle in the alpha channel
     }
 
     gl_FragColor = particle;
