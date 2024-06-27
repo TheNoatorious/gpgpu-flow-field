@@ -85,7 +85,7 @@ const renderer = new THREE.WebGLRenderer({
 renderer.setSize(sizes.width, sizes.height);
 renderer.setPixelRatio(sizes.pixelRatio);
 
-debugObject.clearColor = "#29191f";
+debugObject.clearColor = "#121212";
 renderer.setClearColor(debugObject.clearColor);
 
 /**
