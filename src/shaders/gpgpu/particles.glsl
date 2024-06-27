@@ -2,6 +2,8 @@ uniform float uTime;
 uniform float uDeltaTime; 
 uniform sampler2D uBase; 
 uniform float uFlowFieldInfluence;
+uniform float uFlowFieldStrength;
+uniform float uFlowFieldFrequency;
 
 #include ../includes/simplexNoise4d.glsl
 
@@ -25,13 +27,13 @@ void main() {
         // Particle flow field direction
         // A SimplexNoise for each vertex
         vec3 flowField = vec3(
-            simplexNoise4d(vec4(particle.xyz + 0.0, time)),
-            simplexNoise4d(vec4(particle.xyz + 1.0, time)),
-            simplexNoise4d(vec4(particle.xyz + 2.0, time))
+            simplexNoise4d(vec4(particle.xyz * uFlowFieldFrequency + 0.0, time)),
+            simplexNoise4d(vec4(particle.xyz * uFlowFieldFrequency + 1.0, time)),
+            simplexNoise4d(vec4(particle.xyz * uFlowFieldFrequency + 2.0, time))
         ); 
 
         flowField = normalize(flowField); // Normalize the direction
-        particle.xyz += flowField * uDeltaTime * strength * 0.05; // Add the direction to the particles
+        particle.xyz += flowField * uDeltaTime * uFlowFieldStrength * 0.05; // Add the direction to the particles
 
         // Life cycle: Decay
         particle.a += uDeltaTime * 0.03; // Set life cycle in the alpha channel
