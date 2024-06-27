@@ -11,7 +11,8 @@ The GPGPU (General-Purpose computing on Graphics Processing Units) is a way of u
 
 ## Shaders
 
-The shader inside this project is meant for the particles. The size of the particles is handled with the perspective and can be controlled in the `controls` panel.
+1. gpgpu/particles; handles the position and flow field of each of the particles
+2. particles/fragment, vertex; styling for each particles
 
 ## Setup
 
