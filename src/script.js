@@ -270,6 +270,7 @@ gui.add(gpgpu.particlesVariable.material.uniforms.uFlowFieldInfluence, "value")
 gui.add(gpgpu.particlesVariable.material.uniforms.uFlowFieldStrength, "value")
     .min(0)
     .max(10)
+    .step(0.001)
     .name("FlowField Strength");
 
 gui.add(gpgpu.particlesVariable.material.uniforms.uFlowFieldFrequency, "value")
