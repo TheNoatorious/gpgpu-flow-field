@@ -33,7 +33,7 @@ void main() {
         ); 
 
         flowField = normalize(flowField); // Normalize the direction
-        particle.xyz += flowField * uDeltaTime * uFlowFieldStrength * 0.05; // Add the direction to the particles
+        particle.xyz += flowField * uDeltaTime * strength * uFlowFieldStrength; // Add the direction to the particles
 
         // Life cycle: Decay
         particle.a += uDeltaTime * 0.03; // Set life cycle in the alpha channel
