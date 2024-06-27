@@ -8,6 +8,16 @@ import particlesVertexShader from "./shaders/particles/vertex.glsl";
 import particlesFragmentShader from "./shaders/particles/fragment.glsl";
 import gpgpuParticlesShader from "./shaders/gpgpu/particles.glsl";
 
+import Stats from "stats.js";
+
+/**
+ * Stats FPS
+ */
+
+const stats = new Stats();
+stats.showPanel(0);
+document.body.appendChild(stats.dom);
+
 /**
  * Base
  */
@@ -290,6 +300,8 @@ const tick = () => {
     const deltaTime = elapsedTime - previousTime;
     previousTime = elapsedTime;
 
+    stats.begin();
+
     // Update controls
     controls.update();
 
@@ -306,6 +318,8 @@ const tick = () => {
 
     // Call tick again on the next frame
     window.requestAnimationFrame(tick);
+
+    stats.end();
 };
 
 tick();
