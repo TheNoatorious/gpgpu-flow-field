@@ -1,4 +1,4 @@
-[![Website Preview](https://gpgpu-flow-field-five.vercel.app/static/img/website-preview.png)](https://gpgpu-flow-field-five.vercel.app/)
+[![Website Preview](https://gpgpu-flow-field-five.vercel.app/img/website-preview.png)](https://gpgpu-flow-field-five.vercel.app/)
 
 # GPGPU Flow Field
 
