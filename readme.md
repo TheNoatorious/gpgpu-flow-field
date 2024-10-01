@@ -1,4 +1,5 @@
 [![Website Preview](https://gpgpu-flow-field-five.vercel.app/img/website-preview.png)](https://gpgpu-flow-field-five.vercel.app/)
+_(Click the image to open the site — use Ctrl+Click or Cmd+Click to open in a new tab)_
 
 # GPGPU Flow Field
 
