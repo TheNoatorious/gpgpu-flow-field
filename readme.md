@@ -1,3 +1,5 @@
+[![Website Preview](https://gpgpu-flow-field-five.vercel.app/static/img/website-preview.png)](https://gpgpu-flow-field-five.vercel.app/)
+
 # GPGPU Flow Field
 
 This project was built with [Chartogne Tailler](https://chartogne-taillet.com/en) by Bruno Simon as inspiration to explorer the techniques that have been used on that website.
